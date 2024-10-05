@@ -1,54 +1,45 @@
 <div class="row">
-    <hr>
+
     <div class="col-xs-10">
-        <a class="list-group-item clearfix" 
-        *ngFor="let contact of contacts">
-        
-            <div class="pull-left">
-                <h4 class="list-group-item-heading">{{contact.name}}</h4>
-            </div>
-            <div class="row">
-                <div class="col-xs-10">
-                    <div class="pull-left">
-                        <img [src]="contact.imageUrl" alt="{{contact.name}}" class="img-responsive"
-                            style="max-height: 50px;">
-                    </div>
-                </div>
-            </div>
-                <div class="col-xs-10">
-                    <div class="pull-right">
-                        <button class="btn btn-primary" type="submit">Edit</button>
-                        <button class="btn btn-danger" type="button">Delete</button>
-                        
-                    </div>
 
-            </div>
-        </a>
-        
-    </div>
-            
-
-    </div>
-    <div class="row">
-        <div class="col-xs-10">
-            <div class="pull-left"></div>
-                <div class="font-weight-bold">
-                    <p>Email: </p>
-                </div>
-            </div>
-        
+        <div class="pull-left">
+            <h4 class="list-group-item-heading">{{contact.name}}</h4>
+        </div>
+        <div class="row">
             <div class="col-xs-10">
                 <div class="pull-left">
-                    <div class="font-weight-bold">
-                        <p>Phone: </p>
-                    </div>
+                    <img [src]="contact.imageUrl" alt="{{contact.name}}" class="img-responsive"
+                        style="max-height: 50px;">
                 </div>
             </div>
         </div>
+        <div class="col-xs-10">
+            <div class="pull-right">
+                <button class="btn btn-primary" type="submit">Edit</button>
+                <button class="btn btn-danger" type="button">Delete</button>
 
-            
-    
-            
-        
-    
+            </div>
 
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-xs-10">
+        <div class="pull-left"></div>
+        <div class="font-weight-bold">
+            <p>{{contact.email}} </p>
+        </div>
+    </div>
+
+    <div class="col-xs-10">
+        <div class="pull-left">
+            <div class="font-weight-bold">
+                <p>{{contact.phone}} </p>
+            </div>
+        </div>
+    </div>
+</div>

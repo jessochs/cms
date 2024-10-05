@@ -1,10 +1,31 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-5">
-        <app-contact-list></app-contact-list>
+        <app-contact-list
+        (selectedContactEvent)="selectedContact=$event"></app-contact-list>
         
     </div>
     <div class="col-md-7">
-        <app-contact-detail></app-contact-detail>
+        <app-contact-detail
+        *ngIf="selectedContact; else infoText"
+        [contact]="selectedContact"></app-contact-detail>
+        <ng-template #infoText>
+            <p>Pease select a Contact!</p>
+        </ng-template>
+    
          
     </div>
-</div>
+</div> -->
+<div class="row">
+    <div class="col-md-5">
+      <app-contact-list
+      (selectedContactEvent)="selectedContact"></app-contact-list>
+    </div>
+    <div class="col-md-7">
+      <app-recipe-detail
+        *ngIf="selectedContact; else infoText"
+        [contact]="selectedContact"></app-recipe-detail>
+      <ng-template #infoText>
+        <p>Please select a Contact!</p>
+      </ng-template>
+    </div>
+  </div>
