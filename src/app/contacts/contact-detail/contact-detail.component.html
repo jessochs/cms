@@ -15,8 +15,10 @@
         </div>
         <div class="col-xs-10">
             <div class="pull-right">
-                <button class="btn btn-primary" type="submit">Edit</button>
-                <button class="btn btn-danger" type="button">Delete</button>
+                <a class="btn btn-primary" type="submit"
+                [routerLinkActive]="['active']" 
+                [routerLink]="[':id/edit']">Edit</a>
+                <a class="btn btn-danger" type="button" (click)="onDelete()">Delete</a>
 
             </div>
 
