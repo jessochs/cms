@@ -4,13 +4,14 @@ import { DocumentService } from '../document.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WindRefService } from '../../wind-ref.service';
 
+
 @Component({
   selector: 'app-document-detail',
   templateUrl: './document-detail.component.html',
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit{
-  document: Document;
+  public document: Document;
   id: string;
   nativeWindow: any;
   
@@ -27,10 +28,16 @@ export class DocumentDetailComponent implements OnInit{
       (params: Params) => {
         this.id = params['id']
         this.document = this.documentService.getDocument(this.id)
+        if (!this.document) {
+          console.error(`Document with id ${this.id} not found.`);
+          // You may want to redirect or show a message if document is not found
+        }
       }
     )
+ 
+  }
+  
        
-   }
 
    onView() {
     if (this.document.url) {
