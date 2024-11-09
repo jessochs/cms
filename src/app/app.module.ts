@@ -8,7 +8,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactItemComponent } from './contacts/contact-item/contact-item.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocumentsComponent } from './documents/documents.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
 import { DocumentItemComponent } from './documents/document-item/document-item.component';
@@ -20,6 +20,7 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { DropdownDirective } from './dropdown.directive';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { EditContactComponent } from './contacts/edit-contact/edit-contact.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

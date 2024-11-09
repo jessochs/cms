@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Document } from './document.model';
 import { MOCKDOCUMENTS} from './MOCKDOCUMENTS';
 import { Subject } from 'rxjs';
@@ -10,8 +10,10 @@ import { Subject } from 'rxjs';
 
 export class DocumentService {
   documentListChangedEvent = new Subject<Document[]>()
-  documentSelectedEvent = new EventEmitter<Document>();
-  documentChangedEvent = new EventEmitter<Document[]>();
+  startedEditing = new Subject<number>;
+
+  // documentSelectedEvent = new EventEmitter<Document>();
+  // documentChangedEvent = new EventEmitter<Document[]>();
 
   private documents: Document[] = [];
   private maxDocumentId: number;
@@ -94,15 +96,5 @@ export class DocumentService {
     return null;
    }
 
-//    deleteDocument(document: Document) {
-//     if (!document) {
-//        return;
-//     }
-//     const pos = this.documents.indexOf(document);
-//     if (pos < 0) {
-//        return;
-//     }
-//     this.documents.splice(pos, 1);
-//     this.documentChangedEvent.emit(this.documents.slice());
-//  }
-}
+   
+  }
