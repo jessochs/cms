@@ -4,12 +4,14 @@ export class Document {
     public name: string;
     public description?: string;
     public url: string;
-
-    constructor(id: string, name: string,  url: string, description?: string, ){
-        this.id = id;
-        this.name = name;
-        this.description = description || '';
-        this.url = url
-
+    public children?: Document[]; // Add children property
+  
+    constructor(id: string, name: string, url: string, description?: string, children?: Document[]) {
+      this.id = id;
+      this.name = name;
+      this.description = description || '';
+      this.url = url;
+      this.children = children || []; // Initialize children if not provided
     }
-}
+  }
+  

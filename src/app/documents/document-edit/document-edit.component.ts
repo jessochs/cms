@@ -37,7 +37,7 @@ export class DocumentEditComponent implements OnInit {
         this.editMode = false;
         return;
        } 
-       this.originalDocument = this.documentService.getDocument(this.id)
+      //originalDocument = this.documentService.getDocument(this.id)
 
        if (!this.originalDocument) {
         return
@@ -52,16 +52,16 @@ export class DocumentEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const value = form.value;
-    const newDocument = new Document(value.name, value.description, value.url);
+    // const value = form.value;
+    // const newDocument = new Document(value.name, value.description, value.url);
 
-    if (this.editMode = true) {
-      this.documentService.updateDocument(this.originalDocument, newDocument);
+    // if (this.editMode = true) {
+    //   this.documentService.updateDocument(this.originalDocument, newDocument);
 
-    } else {
-      this.documentService.addDocument(newDocument)
-    }
-    this.router.navigate(['/documents'], {relativeTo: this.route})
+    // } else {
+    //   this.documentService.addDocument(newDocument)
+    // }
+    // this.router.navigate(['/documents'], {relativeTo: this.route})
 
 
   }

@@ -7,6 +7,7 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { EditContactComponent } from './contacts/edit-contact/edit-contact.component';
+import { MessageEditComponent } from './messages/message-edit/message-edit.component';
 
 const appRoutes: Routes = [
   
@@ -21,7 +22,10 @@ const appRoutes: Routes = [
     {path: ':id', component: ContactDetailComponent },
     {path: ':id/edit', component: EditContactComponent},
   ]},
-  {path: 'messages', component: MessagesComponent},
+  {path: 'messages', component: MessagesComponent, children: [
+    {path: 'new', component: MessageEditComponent},
+    
+  ]},
   {path: '', redirectTo: 'documents', pathMatch: 'full' },
 ];
 

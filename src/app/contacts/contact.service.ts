@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
-import { Subject } from 'rxjs';
+import { Subject, tap } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ContactService {
   private contacts: Contact[] = [];
   private maxContactId: number;
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
     this.contacts = MOCKCONTACTS;
     console.log(this.contacts)
   }
@@ -39,7 +40,7 @@ export class ContactService {
     this.contacts.push(newContact);
 
     const contactsListClone = this.contacts.slice();
-    this.contactListChanged.next(contactsListClone);
+    this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact){
@@ -54,7 +55,7 @@ export class ContactService {
     this.contacts[pos] = newContact;
 
     const contactsListClone = this.contacts.slice();
-    this.contactListChanged.next(contactsListClone);
+    this.storeContacts();;
   }
 
   deleteContact(contact: Contact) {
@@ -67,13 +68,49 @@ export class ContactService {
     }
     this.contacts.slice(pos, 1);
     const contactsListClone = this.contacts.slice();
-    this.contactListChanged.next(contactsListClone);
+    this.storeContacts();
   }
 
 
   getContacts(){
-    return this.contacts.slice();
-  }
+    return this.http.get<Contact[]>('https://cms-app-e455f-default-rtdb.firebaseio.com/contacts.json')
+    .pipe(
+      tap((contacts: Contact[]) => {
+        this.contacts = contacts || [];
+        this.maxContactId = this.getMaxId();
+
+        this.contacts.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1
+          }
+
+          if (a.name > b.name) {
+            return 1
+          }
+
+          return 0;
+        });
+      
+
+        this.contactListChanged.next(this.contacts.slice());
+      },
+
+      (error: any) => {
+        console.error('An Error has occured: ', error);
+      })
+      );   
+   }
+
+   storeContacts() {
+    const contactsString = JSON.stringify(this.contacts);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.put('https://cms-app-e455f-default-rtdb.firebaseio.com/contacts.json', contactsString, {headers})
+    .subscribe(() => {
+      this.contactListChanged.next(this.contacts.slice());
+    });
+   }
+  
 
   getContact(id: string): Contact {
     for (let contact of this.contacts) {
