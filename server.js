@@ -5,7 +5,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const mongoose = require('mongoose');
 
 
 // import the routing file to handle the default (index) route
@@ -41,6 +41,8 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 // Tell express to use the specified director as the
 // root directory for your web site
 app.use(express.static(path.join(__dirname, 'dist/cms/browser')));
@@ -63,6 +65,18 @@ app.get('*', (req, res) => {
 // app.use(function(req, res, next)  {
 //   res.render("index");
 // });
+
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/cms', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 // Define the port address and tell express to use this port
 const port = process.env.PORT || '3000';
